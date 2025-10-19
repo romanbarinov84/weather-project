@@ -4,6 +4,8 @@ import { showError } from "../components/error.js";
 import { isCyrillic } from "../helpers/checkCyrillic.js";
 import { replaceAbbreviation } from "../helpers/cityAbbraviation.js";
 import { saveCityToLocalStorage } from "../helpers/saveCityToLocalStorage.js";
+import { getForecast, getWeather } from "./getWetherAndForecast.js";
+import { renderCurrentWeather } from "../components/currentWeather.js";
 
 export async function getGeoData() {
   let city = cityInput.value.trim();
@@ -39,9 +41,14 @@ export async function getGeoData() {
 
     saveCityToLocalStorage(city);
 
-    console.log(lat, lon);
+    const weatherData = await getWeather(lat, lon);
+    const forecastData = await getForecast(lat, lon);
+
+    console.log(weatherData);
+    console.log(forecastData);
+
+     renderCurrentWeather(weatherData,city);
   } catch (error) {
-    console.error(error.message);
-    showError("Данные не получены");
+     showError(error.message || "Данные не получены");
   }
 }
