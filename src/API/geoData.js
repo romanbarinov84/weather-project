@@ -6,6 +6,8 @@ import { replaceAbbreviation } from "../helpers/cityAbbraviation.js";
 import { saveCityToLocalStorage } from "../helpers/saveCityToLocalStorage.js";
 import { getForecast, getWeather } from "./getWetherAndForecast.js";
 import { renderCurrentWeather } from "../components/currentWeather.js";
+import { renderHourlyForecast } from "../components/renderHourlyForecast.js";
+import { renderDailyForecast } from "../components/renderDailyForecast.js";
 
 export async function getGeoData() {
   let city = cityInput.value.trim();
@@ -47,6 +49,7 @@ export async function getGeoData() {
      renderCurrentWeather(weatherData,city);
 
     renderHourlyForecast(forecastData);
+    renderDailyForecast(forecastData);
   } catch (error) {
      showError(error.message || "Данные не получены");
   }
