@@ -1,3 +1,4 @@
+import { formatTime } from "../helpers/formatTime.js";
 import { updateHumidityScale } from "../helpers/updateHumidityScale.js";
 import { updateWindDirection } from "../helpers/windParam.js";
 
@@ -10,6 +11,8 @@ const currentWind = document.querySelector(".wind");
 const currentVisibility = document.querySelector(".visibility");
 const currentHumidity = document.querySelector(".humidity");
 const currentPressure = document.querySelector(".pressure");
+const sunriseItem = document.querySelector(".sunrise");
+const sunsetItem = document.querySelector(".sunset");
 
 export const renderCurrentWeather = (data, city) => {
   currentCity.textContent = city || "неизвестно";
@@ -34,4 +37,13 @@ export const renderCurrentWeather = (data, city) => {
 
    const humidity = data.main?.humidity || 0;
     updateHumidityScale(humidity);
+
+    const {sunrise,sunset} = data.sys || {};
+
+    const {timezone} = data || {};
+
+    sunriseItem.textContent = sunrise ? formatTime(sunrise,timezone) : "Неизвестно";
+    sunsetItem.textContent = sunset ? formatTime(sunset,timezone) : "Неизвестно";
+
+
 };
