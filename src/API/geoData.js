@@ -44,9 +44,9 @@ export async function getGeoData() {
     const weatherData = await getWeather(lat, lon);
     const forecastData = await getForecast(lat, lon);
 
-    
-
      renderCurrentWeather(weatherData,city);
+
+    renderHourlyForecast(forecastData);
   } catch (error) {
      showError(error.message || "Данные не получены");
   }
