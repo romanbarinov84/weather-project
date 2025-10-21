@@ -1,4 +1,5 @@
 import { getGeoData } from "./src/API/geoData.js";
+import { getCurrentYear } from "./src/components/currentYear.js";
 import { geoLocation } from "./src/components/geoLocation.js";
 import { getWeatherByForm } from "./src/components/inputForm.js";
 import { scrollTop } from "./src/components/scrollToTop.js";
@@ -13,4 +14,5 @@ export function initApp(){
     renderCurrentTime();
     geoLocation();
     scrollTop();
+    getCurrentYear();
 }

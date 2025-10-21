@@ -8,8 +8,11 @@ export const renderHourlyForecast = (data) => {
 
   const daysOfWeak = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
 
+  const timeZoneOffset = data.city.timezone * 1000;
+
+
   data.list.forEach((item) => {
-    const date = new Date(item.dt * 1000);
+    const date = new Date(item.dt * 1000 + timeZoneOffset);
     const hour = date.getHours();
     const temp = Math.round(item.main.temp);
     const icon = item.weather[0].icon;
